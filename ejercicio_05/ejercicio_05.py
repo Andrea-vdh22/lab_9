@@ -31,26 +31,38 @@ Requisitos
 
 
 def extraer_valores(datos):
-    pass
+    """Devuelve una lista plana con todos los números de la estructura anidada."""
+    resultado = []
+    for elemento in datos:
+        if isinstance(elemento, list):
+            resultado.extend(extraer_valores(elemento))
+        else:
+            resultado.append(elemento)
+    return resultado
 
 
 # ---------------------------------------------------------------------
 # Preguntas de análisis (responde debajo de cada pregunta)
 # ---------------------------------------------------------------------
 # 1. ¿Qué devuelve la función cuando recibe una lista vacía?
-#
+# Devuelve una lista vacía, ya que no hay elementos que procesar.
 #
 # 2. ¿Qué diferencia hay entre incorporar un número e incorporar el
 #    resultado de una llamada recursiva?
-#
-#
+# Incorporar un número simplemente lo agrega a la lista de resultados, mientras que incorporar el resultado de una llamada recursiva agrega todos los números de la sublista
+#  procesada.
 # 3. Dibuja únicamente las llamadas a extraer_valores() para
 #    [1, [2, [], [1]], 4]. ¿Cuántas llamadas se realizan, incluyendo las
 #    de listas vacías?
-#
+# Se realizan 5 llamadas:
+# extraer_valores([1, [2, [], [1]], 4])
+# extraer_valores([2, [], [1]])
+# extraer_valores([])
+# extraer_valores([1])
+# extraer_valores([4])
 #
 # 4. ¿Por qué cada llamada necesita su propia lista de resultados?
-#
+# Cada llamada necesita su propia lista de resultados para mantener el estado local de los números extraídos en cada nivel de anidamiento.
 #
 
 
