@@ -27,7 +27,15 @@ Restricciones
 
 
 def potencia(base, exponente):
-    pass
+    if exponente == 0:
+        return 1
+    else:
+        return base * potencia(base, exponente - 1)
+    print(potencia(2, 4))    # 16
+    print(potencia(5, 0))    # 1 
+    print(potencia(-2, 3))   # -8 
+    print(potencia(0, 5))    # 0
+    
 
 
 # ---------------------------------------------------------------------
