@@ -32,32 +32,44 @@ Restricciones
 
 
 def buscar_codigo(codigos, objetivo, izquierda, derecha):
-    pass
-
+    if izquierda > derecha:
+        return -1
+    medio = (izquierda + derecha) // 2
+    if codigos[medio] == objetivo:
+        return medio
+    elif codigos[medio] < objetivo:
+        return buscar_codigo(codigos, objetivo, medio + 1, derecha)
+    else:
+        return buscar_codigo(codigos, objetivo, izquierda, medio - 1)
+   
+  
 
 # ---------------------------------------------------------------------
 # Preguntas de análisis (responde debajo de cada pregunta)
 # ---------------------------------------------------------------------
 # 1. ¿Cuáles son las dos situaciones en las que termina la búsqueda?
-#
+# Si el código se encuentra en la lista, se devuelve su índice. Si el código no se encuentra, se devuelve -1.
 #
 # 2. ¿Por qué no debes incluir nuevamente la posición central en el
 #    siguiente intervalo?
-#
+# porque ya se ha comparado el valor en la posición central con el objetivo, y si no es igual, no puede ser el objetivo. Por lo tanto, se puede descartar esa posición y 
+# continuar la búsqueda en la mitad restante.
 #
 # 3. Completa la traza buscando 300 en codigos. Si una llamada no llega a
 #    calcular el medio, escribe "—".
 #
 #    Llamada | Izquierda | Derecha | Medio | Decisión
 #    --------|-----------|---------|-------|---------
-#       1    |           |         |       |
-#       2    |           |         |       |
-#       3    |           |         |       |
-#       4    |           |         |       |
+#       1    |      0     |    6    |   3   |  < 300
+#       2    |      4     |    6    |   5   |  > 300
+#       3    |      4     |    4    |   4   |  = 300
+#       4    |      5     |    4    |   —   |  —
 #
 # 4. ¿Qué diferencia hay entre el progreso de esta función y el de
 #    contar_desde_limite()?
-#
+# En contar_desde_limite(), el progreso se realiza evaluando cada elemento de la lista desde una posición inicial hasta el final, mientras que en buscar_codigo(), el progreso 
+# se realiza dividiendo la lista en mitades y descartando la mitad que no puede contener el objetivo, lo que permite reducir significativamente el número de elementos a evaluar
+# en cada llamada recursiva.
 #
 
 
